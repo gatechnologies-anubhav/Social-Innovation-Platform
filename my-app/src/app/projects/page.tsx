@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Project } from "@/entities/Project";
+
 import { Search, Filter, Star, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import ProjectCard from "@/components/projects/ProjectsCard";
@@ -13,14 +13,82 @@ type ProjectType = {
   category: string;
   [key: string]: any; // fallback for other fields
 };
+// types/Project.ts
 
+export interface Project {
+  title: string; // Name of the social project
+  description: string; // Short, kid-friendly description of the project
+  image_url?: string; // Image for the project card
+  goal_amount: number; // Target donation amount
+  raised_amount?: number; // Amount raised so far (default 0)
+  category: "animals" | "environment" | "education" | "community" | "health"; // Project category
+  age_group?: "all" | "10-12" | "13-15"; // Recommended age group (default: all)
+  difficulty?: "easy" | "medium" | "hard"; // Project difficulty (default: easy)
+}
+const dummyProjects = [
+  {
+    id: "1",
+    title: "Save the Puppies 🐶",
+    description: "Help give food, shelter, and cuddles to stray puppies in need.",
+    image_url: "https://images.unsplash.com/photo-1558788353-f76d92427f16?w=600&h=400&fit=crop",
+    goal_amount: 500,
+    raised_amount: 320,
+    category: "animals",
+    difficulty: "easy",
+    age_group: "all",
+  },
+  {
+    id: "2",
+    title: "Plant 1,000 Trees 🌳",
+    description: "Join hands to fight climate change by planting trees in your community.",
+    image_url: "https://images.unsplash.com/photo-1506765515384-028b60a970df?w=600&h=400&fit=crop",
+    goal_amount: 1000,
+    raised_amount: 700,
+    category: "environment",
+    difficulty: "medium",
+    age_group: "10-12",
+  },
+  {
+    id: "3",
+    title: "School Supplies for Kids 🎒",
+    description: "Donate books, pencils, and bags so every child can learn happily.",
+    image_url: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&h=400&fit=crop",
+    goal_amount: 800,
+    raised_amount: 250,
+    category: "education",
+    difficulty: "easy",
+    age_group: "all",
+  },
+  {
+    id: "4",
+    title: "Community Playground 🏞️",
+    description: "Build a safe, colorful playground where kids can play and laugh.",
+    image_url: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=400&fit=crop",
+    goal_amount: 2000,
+    raised_amount: 1200,
+    category: "community",
+    difficulty: "hard",
+    age_group: "13-15",
+  },
+  {
+    id: "5",
+    title: "Hospital Toys for Kids 💖",
+    description: "Bring joy to children in hospitals with soft toys and games.",
+    image_url: "https://images.unsplash.com/photo-1603570419989-897f33e6b19b?w=600&h=400&fit=crop",
+    goal_amount: 600,
+    raised_amount: 600,
+    category: "health",
+    difficulty: "medium",
+    age_group: "all",
+  },
+];
 export default function Projects() {
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectType[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
- 
+
   const categories = [
     { id: "all", label: "All Projects", emoji: "🌟", color: "blue" },
     { id: "animals", label: "Animals", emoji: "🐾", color: "green" },
@@ -59,9 +127,8 @@ export default function Projects() {
   const loadProjects = async () => {
     setIsLoading(true);
     try {
-      //@ts-ignore
-      const projectList = await Project.list();
-      setProjects(projectList);
+  
+      setProjects(dummyProjects);
     } catch (error) {
       console.error("Error loading projects:", error);
     }

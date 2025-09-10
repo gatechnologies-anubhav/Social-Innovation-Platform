@@ -35,13 +35,13 @@ export default function ProjectCard({ project, onDonate, onShare }: any) {
     <Card className="bg-white rounded-3xl overflow-hidden bubble-shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bounce-hover">
       {/* Project Image */}
       <div className="relative w-full h-48">
-        <Image
+        <img
           src={
             project.image_url ||
             "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop"
           }
           alt={project.title}
-          fill
+          
           className="object-cover"
         />
 
