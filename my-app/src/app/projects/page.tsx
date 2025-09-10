@@ -74,13 +74,14 @@ const dummyProjects = [
     id: "5",
     title: "Hospital Toys for Kids 💖",
     description: "Bring joy to children in hospitals with soft toys and games.",
-    image_url: "https://images.unsplash.com/photo-1603570419989-897f33e6b19b?w=600&h=400&fit=crop",
+    image_url: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop",
     goal_amount: 600,
     raised_amount: 600,
     category: "health",
     difficulty: "medium",
     age_group: "all",
   },
+  
 ];
 export default function Projects() {
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -180,55 +181,49 @@ export default function Projects() {
             />
           </div>
 
-          {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`inline-flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-200  bubble-shadow ${
-                  activeCategory === category.id
-                    ? `bg-green-300 text-white`
-                    : "bg- text-gray-700 hover:bg-blue-400"
-                }`}
-              >
-                <span className="text-lg">{category.emoji}</span>
-                <span>{category.label}</span>
-              </button>
-            ))}
-          </div>
+ {/* Category Filters */}
+ <div className="flex flex-wrap justify-center gap-3">
+  {categories.map((category) => (
+    <button
+      key={category.id}
+      onClick={() => setActiveCategory(category.id)}
+      className={`
+        inline-flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-300
+        transform
+        ${activeCategory === category.id 
+          ? `bg-${category.color}-500 text-black shadow-lg -translate-y-1` // active: dark bg + lifted
+          : `bg-${category.color}-100 text-${category.color}-700 hover:bg-${category.color}-200 hover:-translate-y-1 hover:shadow-md` // inactive: light bg + hover lift
+        }
+      `}
+    >
+      <span className="text-lg">{category.emoji}</span>
+      <span>{category.label}</span>
+    </button>
+  ))}
+</div>
         </div>
 
-        {/* Projects Grid */}
-        {isLoading ? (
+         {/* Projects Grid */}
+         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Array(6)
-              .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-3xl p-6 bubble-shadow animate-pulse"
-                >
-                  <div className="w-full h-48 bg-gray-200 rounded-2xl mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                  <div className="h-2 bg-gray-200 rounded mb-4"></div>
-                  <div className="flex gap-3">
-                    <div className="h-12 bg-gray-200 rounded-full flex-1"></div>
-                    <div className="h-12 w-12 bg-gray-200 rounded-full"></div>
-                  </div>
+            {Array(6).fill(0).map((_, i) => (
+              <div key={i} className="bg-white rounded-3xl p-6 bubble-shadow animate-pulse">
+                <div className="w-full h-48 bg-gray-200 rounded-2xl mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-2 bg-gray-200 rounded mb-4"></div>
+                <div className="flex gap-3">
+                  <div className="h-12 bg-gray-200 rounded-full flex-1"></div>
+                  <div className="h-12 w-12 bg-gray-200 rounded-full"></div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         ) : filteredProjects.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-bold text-gray-700 mb-2">
-              No projects found!
-            </h3>
-            <p className="text-gray-500">
-              Try a different search or category. 🤗
-            </p>
+            <h3 className="text-2xl font-bold text-gray-700 mb-2">No projects found!</h3>
+            <p className="text-gray-500">Try a different search or category. 🤗</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

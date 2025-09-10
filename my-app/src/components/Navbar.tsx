@@ -13,10 +13,10 @@ export const Navbar =()=>{
     return(
         <nav className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="hidden md:flex justify-between items-center h-20 ">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3 wiggle-hover">
-              <div className="relative">
+            <Link href="/" className="flex items-center space-x-3 wiggle-hover ">
+              <div className="relative ">
                 <div className="w-16 h-16 rainbow-animation rounded-full flex items-center justify-center bg-white shadow-lg">
                   <Heart className="w-8 h-8 text-pink-500" fill="currentColor" />
                 </div>
@@ -60,7 +60,7 @@ export const Navbar =()=>{
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden bg-gradient-to-r from-blue-400 to-purple-400">
+        <div className="md:hidden bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
           <div className="flex justify-around py-6">
             {navLinks.map(({ href, label, icon: Icon, color }) => (
               <Link key={href} href={href} className="flex flex-col items-center space-y-2 wiggle-hover">

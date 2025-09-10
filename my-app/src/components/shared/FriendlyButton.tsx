@@ -27,14 +27,14 @@ export default function FriendlyButton({
   className = "",
 }: FriendlyButtonProps) {
   const baseClasses =
-    "font-bold rounded-full transition-all duration-200 bounce-hover bubble-shadow border-0";
+    "font-bold rounded-full transition-all duration-200  bubble-shadow border-0";
 
   const variants: Record<string, string> = {
-    primary: "fun-gradient text-white hover:shadow-lg transform hover:scale-105",
+    primary: "fun-gradient text-white hover:shadow-lg  transform transition-transform duration-300 hover:-translate-y-1",
     secondary:
       "bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50",
     white:
-      "bg-white text-blue-600 hover:bg-blue-50 hover:shadow-lg transform hover:scale-105",
+      "bg-white text-blue-600 hover:bg-blue-50 hover:shadow-lg  transform transition-transform duration-300 hover:-translate-y-1",
   };
 
   const sizes: Record<string, string> = {

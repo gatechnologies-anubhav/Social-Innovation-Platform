@@ -32,9 +32,9 @@ export default function ProjectCard({ project, onDonate, onShare }: any) {
   };
 
   return (
-    <Card className="bg-white rounded-3xl overflow-hidden bubble-shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="bg-white rounded-3xl overflow-hidden bubble-shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ">
       {/* Project Image */}
-      <div className="relative w-full h-48">
+      <div className="relative -top-6">
         <img
           src={
             project.image_url ||
@@ -42,7 +42,7 @@ export default function ProjectCard({ project, onDonate, onShare }: any) {
           }
           alt={project.title}
           
-          className="object-cover"
+          className="w-full h-62 object-cover"
         />
 
         {/* Category Badge */}
@@ -74,7 +74,7 @@ export default function ProjectCard({ project, onDonate, onShare }: any) {
         </div>
       </div>
 
-      <CardContent className="p-6">
+      <CardContent className="p-">
         {/* Title and Description */}
         <div className="mb-4">
           <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
@@ -130,11 +130,12 @@ export default function ProjectCard({ project, onDonate, onShare }: any) {
             </FriendlyButton>
           </div>
           <button
-            onClick={() => onShare(project)}
-            className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center bounce-hover bubble-shadow hover:bg-blue-200 transition-colors"
-          >
-            <Share2 className="w-5 h-5" />
-          </button>
+    onClick={() => onShare(project)}
+    className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center bubble-shadow 
+               transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-blue-200"
+  >
+    <Share2 className="w-5 h-5" />
+  </button>
         </div>
 
         {/* Fun Encouragement */}

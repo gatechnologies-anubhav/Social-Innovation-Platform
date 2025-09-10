@@ -11,7 +11,7 @@ export default function Registration() {
     name: "",
     age: "",
     email: "",
-    password: ""
+    password: ""          
   });
 
   const [step, setStep] = useState(1);
@@ -27,6 +27,13 @@ export default function Registration() {
     e.preventDefault();
     // Here you would typically handle the registration
     console.log("Registration data:", formData);
+     // ✅ Form clear karne ke liye reset
+  setFormData({
+    name: "",
+    age: "",
+    email: "",
+    password: ""
+  });
     // Redirect to success page or login
   };
 
@@ -50,13 +57,15 @@ export default function Registration() {
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <Link
-            href={("/Landing")}
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4 bounce-hover"
-          >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            <span className="font-semibold">Back to Home</span>
-          </Link>
+        <Link
+  href={"/Landing"}
+  className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4 
+             transform transition-transform duration-300 hover:-translate-y-1"
+>
+  <ArrowLeft className="w-5 h-5 mr-2" />
+  <span className="font-semibold">Back to Home</span>
+</Link>
+
 
           <div className="w-20 h-20 fun-gradient rounded-full mx-auto mb-6 flex items-center justify-center float-animation bubble-shadow">
             <Sparkles className="w-10 h-10 text-white" fill="currentColor" />
@@ -97,27 +106,29 @@ export default function Registration() {
               required
             />
 
-            {/* Email Field */}
-            <FriendlyInput
-              icon={Mail}
-              type="email"
-              placeholder="Your email address"
-              value={formData.email}
-              onChange={(value) => handleInputChange("email", value)}
-              color="yellow"
-              required
-            />
+           {/* Email Field */}
+           <FriendlyInput
+  icon={Mail}
+  type="email"
+  placeholder="Your email address"
+  value={formData.email}
+  onChange={(value) => handleInputChange("email", value)}
+  color="yellow"
+  required
+  autoComplete="off"   // ✅ autofill disable
+/>
 
-            {/* Password Field */}
-            <FriendlyInput
-              icon={Lock}
-              type="password"
-              placeholder="Create a super secret password"
-              value={formData.password}
-              onChange={(value) => handleInputChange("password", value)}
-              color="purple"
-              required
-            />
+<FriendlyInput
+  icon={Lock}
+  type="password"
+  placeholder="Create a super secret password"
+  value={formData.password}
+  onChange={(value) => handleInputChange("password", value)}
+  color="purple"
+  required
+  autoComplete="new-password"   // ✅ autofill disable for password
+/>
+
 
             {/* Submit Button */}
             <div className="pt-4">
@@ -135,19 +146,23 @@ export default function Registration() {
           </form>
         </div>
 
-        {/* Fun Facts */}
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 text-center bounce-hover">
-            <div className="text-2xl mb-2">🌟</div>
-            <div className="text-sm font-semibold text-blue-700">500+ Kids</div>
-            <div className="text-xs text-blue-600">Already joined!</div>
-          </div>
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 text-center bounce-hover">
-            <div className="text-2xl mb-2">🎯</div>
-            <div className="text-sm font-semibold text-green-700">50+ Projects</div>
-            <div className="text-xs text-green-600">Ready for you!</div>
-          </div>
-        </div>
+      {/* Fun Facts */}
+<div className="mt-8 grid grid-cols-2 gap-4">
+  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 text-center 
+                  transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg">
+    <div className="text-2xl mb-2">🌟</div>
+    <div className="text-sm font-semibold text-blue-700">500+ Kids</div>
+    <div className="text-xs text-blue-600">Already joined!</div>
+  </div>
+  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 text-center 
+                  transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg">
+    <div className="text-2xl mb-2">🎯</div>
+    <div className="text-sm font-semibold text-green-700">50+ Projects</div>
+    <div className="text-xs text-green-600">Ready for you!</div>
+  </div>
+</div>
+
+
       </div>
     </div>
   );

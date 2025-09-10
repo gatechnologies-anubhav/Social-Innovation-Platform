@@ -36,14 +36,14 @@ export default function Landing() {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start ">
                 <Link href="/auth">
-                  <FriendlyButton variant="primary" size="large" icon={Users} onClick={() => console.log("Join Now clicked")}>
+                  <FriendlyButton variant="primary" size="large" icon={Users} onClick={() => console.log("Join Now clicked")} className=" transform transition-transform duration-300 hover:-translate-y-1">
                     🚀 Join Now
                   </FriendlyButton>
                 </Link>
                 <Link href="/projects">
-                  <FriendlyButton variant="secondary" size="large" icon={Gift} onClick={() => console.log("Explore Projects clicked")}>
+                  <FriendlyButton variant="secondary" size="large" icon={Gift} onClick={() => console.log("Explore Projects clicked")} className=" transform transition-transform duration-300 hover:-translate-y-1">
                     🎁 Explore Projects
                   </FriendlyButton>
                 </Link>
@@ -74,7 +74,7 @@ export default function Landing() {
                   alt="Kids collaborating on projects"
                   width={600}
                   height={600}
-                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                  className="w-full lg:h-96 object-cover rounded-2xl shadow-lg"
                 />
 
                 {/* Floating Elements */}
