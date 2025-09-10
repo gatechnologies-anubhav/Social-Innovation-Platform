@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { createPageUrl } from "@/utiles";
 import { User, Mail, Lock, Calendar, ArrowLeft, Sparkles } from "lucide-react";
 import FriendlyButton from "@/components/shared/FriendlyButton";
 import FriendlyInput from "@/components/shared/FriendlyInput";
@@ -52,7 +51,7 @@ export default function Registration() {
         {/* Header */}
         <div className="text-center mb-8">
           <Link
-            href={createPageUrl("Landing")}
+            href={("/Landing")}
             className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4 bounce-hover"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -93,8 +92,8 @@ export default function Registration() {
               value={formData.age}
               onChange={(value) => handleInputChange("age", value)}
               color="green"
-              min="10"
-              max="15"
+            
+            
               required
             />
 

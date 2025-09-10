@@ -1,26 +1,33 @@
-// pages/projects.js
-import { useState, useEffect } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Project } from "@/entities/Project";
-import { Search, Filter, Star, Heart, Share2 } from "lucide-react";
-import ProjectCard from "@/components/projects/ProjectsCard";
-import FriendlyButton from "@/components/shared/FriendlyButton";
+import { Search, Filter, Star, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import ProjectCard from "@/components/projects/ProjectsCard";
+
+type ProjectType = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  [key: string]: any; // fallback for other fields
+};
 
 export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
-  
+  const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [filteredProjects, setFilteredProjects] = useState<ProjectType[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
-
+ 
   const categories = [
     { id: "all", label: "All Projects", emoji: "🌟", color: "blue" },
     { id: "animals", label: "Animals", emoji: "🐾", color: "green" },
     { id: "environment", label: "Environment", emoji: "🌱", color: "emerald" },
     { id: "education", label: "Education", emoji: "📚", color: "purple" },
     { id: "community", label: "Community", emoji: "🏘️", color: "orange" },
-    { id: "health", label: "Health", emoji: "💚", color: "pink" }
+    { id: "health", label: "Health", emoji: "💚", color: "pink" },
   ];
 
   useEffect(() => {
@@ -31,13 +38,18 @@ export default function Projects() {
     let filtered = projects;
 
     if (activeCategory !== "all") {
-      filtered = filtered.filter(project => project.category === activeCategory);
+      filtered = filtered.filter(
+        (project) => project.category === activeCategory
+      );
     }
 
     if (searchTerm) {
-      filtered = filtered.filter(project =>
-        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (project) =>
+          project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          project.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
       );
     }
 
@@ -47,6 +59,7 @@ export default function Projects() {
   const loadProjects = async () => {
     setIsLoading(true);
     try {
+      //@ts-ignore
       const projectList = await Project.list();
       setProjects(projectList);
     } catch (error) {
@@ -55,16 +68,16 @@ export default function Projects() {
     setIsLoading(false);
   };
 
-  const handleDonate = (project) => {
+  const handleDonate = (project: ProjectType) => {
     alert(`Thanks for wanting to help with "${project.title}"! 🎉`);
   };
 
-  const handleShare = (project) => {
+  const handleShare = (project: ProjectType) => {
     if (navigator.share) {
       navigator.share({
         title: project.title,
         text: project.description,
-        url: window.location.href
+        url: window.location.href,
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
@@ -81,12 +94,14 @@ export default function Projects() {
             Amazing Projects to Support! 🌟
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose a project that makes your heart happy and help make the world better! ✨
+            Choose a project that makes your heart happy and help make the world
+            better! ✨
           </p>
         </div>
 
         {/* Search and Filters */}
         <div className="mb-8">
+          {/* Search Bar */}
           <div className="relative max-w-md mx-auto mb-6">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <Input
@@ -98,6 +113,7 @@ export default function Projects() {
             />
           </div>
 
+          {/* Category Filters */}
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category) => (
               <button
@@ -116,26 +132,36 @@ export default function Projects() {
           </div>
         </div>
 
+        {/* Projects Grid */}
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Array(6).fill(0).map((_, i) => (
-              <div key={i} className="bg-white rounded-3xl p-6 bubble-shadow animate-pulse">
-                <div className="w-full h-48 bg-gray-200 rounded-2xl mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                <div className="h-2 bg-gray-200 rounded mb-4"></div>
-                <div className="flex gap-3">
-                  <div className="h-12 bg-gray-200 rounded-full flex-1"></div>
-                  <div className="h-12 w-12 bg-gray-200 rounded-full"></div>
+            {Array(6)
+              .fill(0)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-3xl p-6 bubble-shadow animate-pulse"
+                >
+                  <div className="w-full h-48 bg-gray-200 rounded-2xl mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                  <div className="h-2 bg-gray-200 rounded mb-4"></div>
+                  <div className="flex gap-3">
+                    <div className="h-12 bg-gray-200 rounded-full flex-1"></div>
+                    <div className="h-12 w-12 bg-gray-200 rounded-full"></div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         ) : filteredProjects.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-bold text-gray-700 mb-2">No projects found!</h3>
-            <p className="text-gray-500">Try a different search or category. 🤗</p>
+            <h3 className="text-2xl font-bold text-gray-700 mb-2">
+              No projects found!
+            </h3>
+            <p className="text-gray-500">
+              Try a different search or category. 🤗
+            </p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -150,12 +176,24 @@ export default function Projects() {
           </div>
         )}
 
+        {/* Fun Encouragement Section */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-blue-50 via-green-50 to-yellow-50 rounded-3xl p-8 bubble-shadow">
             <div className="flex justify-center space-x-4 mb-4">
-              <Heart className="w-8 h-8 text-red-400 float-animation" fill="currentColor" />
-              <Star className="w-8 h-8 text-yellow-400 float-animation" fill="currentColor" style={{animationDelay: '0.5s'}} />
-              <Heart className="w-8 h-8 text-pink-400 float-animation" fill="currentColor" style={{animationDelay: '1s'}} />
+              <Heart
+                className="w-8 h-8 text-red-400 float-animation"
+                fill="currentColor"
+              />
+              <Star
+                className="w-8 h-8 text-yellow-400 float-animation"
+                fill="currentColor"
+                style={{ animationDelay: "0.5s" }}
+              />
+              <Heart
+                className="w-8 h-8 text-pink-400 float-animation"
+                fill="currentColor"
+                style={{ animationDelay: "1s" }}
+              />
             </div>
             <h3 className="text-2xl font-bold text-gray-700 mb-2">
               Every donation makes a difference! 🌟

@@ -1,65 +1,69 @@
-import React from "react";
+"use client";
+
+import Image from "next/image";
 import { Heart, Share2, Star, Gift } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import FriendlyButton from "../shared/FriendlyButton";
-import {Project} from "@/entities/Project";
 
-type ProjectCardProps = {
-    project: Project;
-    onDonate: (project: Project) => void;
-    onShare: (project: Project) => void;
-  };
+export default function ProjectCard({ project, onDonate, onShare }: any) {
+  const progressPercentage = (project.raised_amount / project.goal_amount) * 100;
 
-export default function ProjectCard({ project, onDonate, onShare }: ProjectCardProps) {
-    const progressPercentage = ((project.raised_amount ?? 0) / project.goal_amount) * 100;
-
-  
-  const categoryEmojis = {
+  const categoryEmojis: Record<string, string> = {
     animals: "🐾",
     environment: "🌱",
-    education: "📚", 
+    education: "📚",
     community: "🏘️",
-    health: "💚"
+    health: "💚",
   };
 
-  const categoryColors = {
+  const categoryColors: Record<string, string> = {
     animals: "bg-green-100 text-green-700 border-green-200",
     environment: "bg-emerald-100 text-emerald-700 border-emerald-200",
     education: "bg-purple-100 text-purple-700 border-purple-200",
     community: "bg-orange-100 text-orange-700 border-orange-200",
-    health: "bg-pink-100 text-pink-700 border-pink-200"
+    health: "bg-pink-100 text-pink-700 border-pink-200",
   };
 
-  const difficultyStars = {
+  const difficultyStars: Record<string, number> = {
     easy: 1,
     medium: 2,
-    hard: 3
+    hard: 3,
   };
 
   return (
     <Card className="bg-white rounded-3xl overflow-hidden bubble-shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bounce-hover">
       {/* Project Image */}
-      <div className="relative">
-        <img 
-          src={project.image_url || `https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop`}
+      <div className="relative w-full h-48">
+        <Image
+          src={
+            project.image_url ||
+            "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop"
+          }
           alt={project.title}
-          className="w-full h-48 object-cover"
+          fill
+          className="object-cover"
         />
-        
+
         {/* Category Badge */}
-        <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-semibold border ${categoryColors[project.category]} bubble-shadow`}>
+        <div
+          className={`absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-semibold border ${categoryColors[project.category]} bubble-shadow`}
+        >
           <span className="mr-1">{categoryEmojis[project.category]}</span>
           {project.category}
         </div>
 
         {/* Difficulty Stars */}
         <div className="absolute top-4 right-4 flex space-x-1">
-        {Array(difficultyStars[project.difficulty ?? "easy"])
-  .fill(0)
-  .map((_, i) => (
-    <Star key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" />
-))}
+          {Array(difficultyStars[project.difficulty])
+            .fill(0)
+            .map((_, i) => (
+              <Star
+                key={i}
+                className="w-4 h-4 text-yellow-400"
+                fill="currentColor"
+              />
+            ))}
         </div>
 
         {/* Fun Stickers */}
@@ -91,11 +95,11 @@ export default function ProjectCard({ project, onDonate, onShare }: ProjectCardP
               ${project.raised_amount || 0} / ${project.goal_amount}
             </span>
           </div>
-          
+
           {/* Custom Star Progress Bar */}
           <div className="relative">
-            <Progress 
-              value={progressPercentage} 
+            <Progress
+              value={progressPercentage}
               className="h-3 bg-gray-200 rounded-full overflow-hidden"
             />
             <div className="absolute -right-1 -top-1">
@@ -136,7 +140,9 @@ export default function ProjectCard({ project, onDonate, onShare }: ProjectCardP
         {/* Fun Encouragement */}
         <div className="text-center mt-4">
           <p className="text-xs text-gray-500 font-medium">
-            {progressPercentage >= 100 ? "🎉 Goal achieved! Amazing!" : "Every dollar helps! ⭐"}
+            {progressPercentage >= 100
+              ? "🎉 Goal achieved! Amazing!"
+              : "Every dollar helps! ⭐"}
           </p>
         </div>
       </CardContent>

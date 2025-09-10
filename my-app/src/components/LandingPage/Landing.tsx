@@ -1,9 +1,9 @@
-// pages/index.js
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Heart, Star, Gift, Users, Sparkles, Zap, Trophy } from "lucide-react";
 import FriendlyButton from "@/components/shared/FriendlyButton";
-import { createPageUrl } from "@/utiles";
 
 export default function Landing() {
   return (
@@ -37,12 +37,12 @@ export default function Landing() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link href={createPageUrl("Registration")}>
+                <Link href="/auth">
                   <FriendlyButton variant="primary" size="large" icon={Users} onClick={() => console.log("Join Now clicked")}>
                     🚀 Join Now
                   </FriendlyButton>
                 </Link>
-                <Link href={createPageUrl("Projects")}>
+                <Link href="/projects">
                   <FriendlyButton variant="secondary" size="large" icon={Gift} onClick={() => console.log("Explore Projects clicked")}>
                     🎁 Explore Projects
                   </FriendlyButton>
@@ -69,7 +69,7 @@ export default function Landing() {
             {/* Right Content - Hero Image */}
             <div className="relative">
               <div className="relative bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 rounded-3xl p-8 bubble-shadow">
-                <Image 
+                <img 
                   src="https://images.unsplash.com/photo-1544776527-59a43e6dd264?w=600&h=600&fit=crop&crop=faces"
                   alt="Kids collaborating on projects"
                   width={600}
@@ -184,7 +184,7 @@ export default function Landing() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={createPageUrl("Registration")}>
+            <Link href="/auth">
               <FriendlyButton variant="white" size="large" icon={ArrowRight} onClick={() => console.log("Get Started Now clicked")}>
                 🎯 Get Started Now
               </FriendlyButton>
