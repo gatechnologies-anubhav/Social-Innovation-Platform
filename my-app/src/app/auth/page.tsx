@@ -58,7 +58,7 @@ export default function Registration() {
         {/* Header */}
         <div className="text-center mb-8">
         <Link
-  href={"/Landing"}
+  href={"/"}
   className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4 
              transform transition-transform duration-300 hover:-translate-y-1"
 >
