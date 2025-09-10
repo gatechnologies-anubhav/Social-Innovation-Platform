@@ -186,10 +186,10 @@ export default function Projects() {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`inline-flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-200 bounce-hover bubble-shadow ${
+                className={`inline-flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-200  bubble-shadow ${
                   activeCategory === category.id
-                    ? `bg-${category.color}-500 text-white`
-                    : "bg-white text-gray-700 hover:bg-gray-50"
+                    ? `bg-green-300 text-white`
+                    : "bg- text-gray-700 hover:bg-blue-400"
                 }`}
               >
                 <span className="text-lg">{category.emoji}</span>

@@ -32,7 +32,7 @@ export default function ProjectCard({ project, onDonate, onShare }: any) {
   };
 
   return (
-    <Card className="bg-white rounded-3xl overflow-hidden bubble-shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bounce-hover">
+    <Card className="bg-white rounded-3xl overflow-hidden bubble-shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       {/* Project Image */}
       <div className="relative w-full h-48">
         <img

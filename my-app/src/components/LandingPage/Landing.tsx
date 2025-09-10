@@ -138,7 +138,7 @@ export default function Landing() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-blue-50 to-blue-100 bounce-hover bubble-shadow">
+            <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-blue-50 to-blue-100  bubble-shadow">
               <div className="w-20 h-20 fun-gradient rounded-full mx-auto mb-6 flex items-center justify-center float-animation">
                 <Gift className="w-10 h-10 text-white" />
               </div>
@@ -149,7 +149,7 @@ export default function Landing() {
             </div>
 
             {/* Feature 2 */}
-            <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-green-50 to-green-100 bounce-hover bubble-shadow">
+            <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-green-50 to-green-100  bubble-shadow">
               <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto mb-6 flex items-center justify-center float-animation" style={{animationDelay: '0.5s'}}>
                 <Users className="w-10 h-10 text-white" />
               </div>
@@ -160,7 +160,7 @@ export default function Landing() {
             </div>
 
             {/* Feature 3 */}
-            <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-yellow-50 to-yellow-100 bounce-hover bubble-shadow">
+            <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-yellow-50 to-yellow-100  bubble-shadow">
               <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center float-animation" style={{animationDelay: '1s'}}>
                 <Star className="w-10 h-10 text-white" fill="currentColor" />
               </div>

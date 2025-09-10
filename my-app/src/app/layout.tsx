@@ -4,10 +4,10 @@ import "./globals.css";
 
 export default function Layout({
   children,
-  currentPageName,
+  
 }: {
   children: React.ReactNode;
-  currentPageName?: string;
+ 
 }) {
 
   const geistSans = ({
